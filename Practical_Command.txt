@@ -1,0 +1,90 @@
+Aws Commands:
+Practical 1:
+Practical 2:
+
+Practical 3:Install an Apache server and run the hello world page  by typing command on virtual machine
+
+ec2-user
+sudo su
+yum update -y
+yum install httpd -y
+cd /var/www/html
+echo "Hello World !">index.html
+service httpd start
+chkconfig httpd on
+
+
+Practical 4:Write the shell script in User Data box.
+
+
+#!/bin/bash
+dnf install -y httpd
+systemctl enable httpd
+systemctl start httpd
+echo '<html><h1> Hello Dnyandip I am from Your Web Server</h1></html>'>
+/var/www/html/index.html
+
+Practical 5:
+Practical 6 :IAM
+
+Practical 7: S3 bucket static image
+Practical 8: static website
+
+Practical 9: Working and Implementation of Platform as a service.
+AWS Elastic Beanstalk:
+
+Practical 10 :EMR(hadoop)
+
+sudo hive;
+show databases;
+create database demo;
+create table demo.employee(id int ,name string,salary float);
+describe demo.employee;
+use employee;
+drop table employee;
+drop database demo;
+
+Practical 11: Web Feed
+
+sudo yum install python3
+sudo yum install python3-pip
+pip install feedparser
+nano demo.py
+
+import feedparser
+d = feedparser.parse('http://www.reddit.com/r/python/.rss')
+print(d['feed']['title'])
+print(d['feed']['link'])
+print(d.feed.subtitle)
+print(len(d['entries']))
+
+press ctrl+O
+press ctrl+x
+
+python3 demo.py
+
+Practical 12:RDS
+
+Practical 13:EBS
+
+Practical 14:VPC
+
+#!/bin/bash
+# Install Apache Web Server and PHP
+dnf install -y httpd wget php mariadb105-server
+# Download Lab files
+wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-ACCLFO-2/2-lab2-vpc/s3/lab-app.zip
+unzip lab-app.zip -d /var/www/html/
+# Turn on web server
+chkconfig httpd on
+service httpd start
+
+
+
+
+
+
+
+
+
+

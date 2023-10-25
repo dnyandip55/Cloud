@@ -1,0 +1,150 @@
+Firstly Launch Instance Amazon Linux instance and  notice Availbility Zone of your instance 
+
+In the left navigation pane, choose Volumes.
+Choose Create Volume
+configure:
+Volume Type: General Purpose SSD (gp2)
+Size (GiB):64 GiB
+Availability Zone: Select the same availability zone as your EC2 instance
+
+Choose Add Tag
+•Key: Name
+•Value: My Volume
+And click on Create Volume
+
+Select My Volume.
+
+In the Actions menu, choose Attach volume.
+
+Choose the Instance field, then select the instance that appears (Lab).
+Note that the Device field is set to /dev/sdf. You will use this device identifier in a later task.
+Choose Attach Volume The volume state is now In-use.
+
+Copy public IPv4 address
+connect putty 
+
+Now Type in Putty
+View the storage available on your instance:
+df -h
+
+
+Create an ext3 file system on the new volume:
+
+sudo mkfs -t ext3 /dev/sdf
+
+
+Create a directory for mounting the new storage volume:
+
+sudo mkdir /mnt/data-store
+
+
+
+Mount the new volume:
+
+sudo mount /dev/sdf /mnt/data-store
+
+
+To configure the Linux instance to mount this volume whenever the instance is started, you will need to add a line to /etc/fstab.
+
+echo "/dev/sdf   /mnt/data-store ext3 defaults,noatime 1 2" | sudo tee -a /etc/fstab
+
+
+
+View the configuration file to see the setting on the last line:
+
+cat /etc/fstab
+
+
+
+View the available storage again:
+
+df -h
+
+
+
+
+On your mounted volume, create a file and add some text to it.
+
+sudo sh -c "echo some text has been written > /mnt/data-store/file.txt"
+
+
+
+Verify that the text has been written to your volume.
+
+cat /mnt/data-store/file.txt
+
+
+
+
+Task 5: Create an Amazon EBS Snapshot
+In the AWS Management Console, choose Volumes and select My Volume.
+
+In the Actions menu, select Create snapshot
+
+Choose Add tag then configure:
+Key : Name
+Value: My Snapshot
+
+Choose Create Snapshot
+
+In the left navigation pane, choose Snapshots.
+Your snapshot is displayed. The status will first have a state of Pending, which means that
+the snapshot is being created. It will then change to a state of Completed. 
+
+
+In your remote SSH session, delete the file that you created on your volume.
+
+sudo rm /mnt/data-store/file.txt
+
+
+
+
+Verify that the file has been deleted.
+
+ls /mnt/data-store/
+
+
+
+
+Task 6: Restore the Amazon EBS Snapshot
+
+In the AWS Management Console, select My Snapshot.
+In the Actions menu, select Create volume from snapshot.
+
+For Availability Zone Select the same availability zone that you used earlier.
+
+Choose Add tag then configure:
+Key : Name
+Value : Restored Volume
+Choose Create Volume
+
+You will see successful message
+
+In the left navigation pane, choose Volumes.
+
+Select Restored Volume
+
+In the Actions menu, select Attach volume.
+Choose the Instance
+
+Choose Attach Volume
+You will Successful Message
+
+
+Mount the Restored Volume
+Create a directory for mounting the new storage volume:
+
+sudo mkdir /mnt/data-store2
+
+
+Mount the new volume:
+
+sudo mount /dev/sdg /mnt/data-store2
+
+
+Verify that volume you mounted has the file that you created earlier.
+
+ls /mnt/data-store2/
+
+You should see file.txt.
+Task Done
