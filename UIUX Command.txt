@@ -1,0 +1,32 @@
+Node.js Assignment
+1. Create a .js extension file.
+2. Run it using command node <filename>
+3. You will get output on terminal.
+4. To run express module5. Install express using npm install -g express or
+a. npm install -g express generator
+b. express my-app --view pug
+c. cd my-app
+d. Npm install
+e. Npm start
+f. Then you can directly view your output on browser
+
+
+
+React.js Assignment
+1. Create one folder on Desktop(optional).
+2. Create react project using command npx create-react-app my-app
+3. Or npm install -g create-react-app and
+4. create-react-app my-app
+5. after creating project
+6. cd my-app
+7. npm start.
+8. Create different .js files for components.
+
+
+Angular.js Assignment
+1. Create one folder on Desktop(optional).
+2. Create angular project using command npm install -g @angular/cli
+3. Use command ng new <new-folder-name>
+4. cd<new-folder-name>
+5. To run use command ng serve
+6. To create new components, use command ng g c <component-name>
